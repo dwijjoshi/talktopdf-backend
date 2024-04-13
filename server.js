@@ -4,6 +4,7 @@ const FormData = require("form-data");
 const axios = require("axios");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const multer = require("multer");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -19,6 +20,7 @@ const app = express();
 app.use(cookieParser());
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+app.use(cors({ credentials: true, origin: true }));
 const PORT = 8000;
 
 app.post("/sendPDF", upload.single("file"), async (req, res) => {
