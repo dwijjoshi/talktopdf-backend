@@ -65,6 +65,8 @@ app.post("/sendMessage", (req, res) => {
     },
   };
 
+  console.log("config", config);
+
   const data = {
     sourceId: sourceId,
     messages: [
@@ -74,6 +76,8 @@ app.post("/sendMessage", (req, res) => {
       },
     ],
   };
+
+  console.log("data", data);
 
   axios
     .post("https://api.chatpdf.com/v1/chats/message", data, config)
@@ -85,6 +89,7 @@ app.post("/sendMessage", (req, res) => {
       });
     })
     .catch((error) => {
+      console.log("data", data);
       console.error("Error:", error.message);
       console.log("Response:", error.response.data);
       res.status(500).json({
