@@ -39,7 +39,11 @@ app.post("/sendPDF", upload.single("file"), async (req, res) => {
     .post("https://api.chatpdf.com/v1/sources/add-file", formData, options)
     .then((response) => {
       console.log("Source ID:", response.data.sourceId);
-      res.cookie("sourceId", response.data.sourceId);
+      res.cookie("sourceId", response.data.sourceId, {
+        httpOnly: false,
+        sameSite: "none",
+        secure: true,
+      });
       res.status(200).json({
         success: true,
         sourceId: response.data.sourceId,
